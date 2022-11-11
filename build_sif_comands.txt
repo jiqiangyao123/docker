@@ -1,0 +1,16 @@
+#/share/dept_bbsr/Projects/Cen_Ling/2000_ATACseq/docker/perl
+
+podman pull docker://perl:5.36.0-slim-threaded-buster
+podman ps -a
+podman run cd32dc72d127
+perl rmmit.pl
+podman build .
+#podman build –t rmmit:20221110 .
+#podman image build –t rmmit:20221110 .
+#podman build $(./buildarg.sh .env) –t rmmit:20221110 .
+podman images
+podman login docker.io
+podman image push 4f8a2b2f34e2 docker.io/jiqiangyao/rmmit:20221110
+singularity build test.sif docker://jiqiangyao/rmmit:20221110
+singularity exec test.sif perl rmmit.pl
+ 
